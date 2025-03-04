@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentFormulaire">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        android:id="@+id/linear1"
+        >
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/linear1"
+        android:orientation="vertical"
+        android:id="@+id/linear2"
+        android:gravity="center"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linear21"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:id="@+id/logintxt"
+                />
+            <EditText
+                android:layout_width="200dp"
+
+                android:layout_height="wrap_content"
+                android:id="@+id/login"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linear22"
+            android:gravity="center"
+
+            >
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/password"
+                android:id="@+id/pswdtxt"
+                />
+            <EditText
+                android:layout_width="200dp"
+
+                android:layout_height="wrap_content"
+                android:id="@+id/pswd"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linear23"
+            android:gravity="center"
+
+            >
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/nom"
+                android:id="@+id/nomtxt"
+                />
+            <EditText
+                android:layout_width="200dp"
+
+                android:layout_height="wrap_content"
+                android:id="@+id/nom"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linear24"
+            android:gravity="center"
+
+            >
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/date_naissance"
+                android:id="@+id/date_naissancetxt"
+                />
+            <EditText
+                android:layout_width="200dp"
+
+                android:layout_height="wrap_content"
+                android:id="@+id/date_naissance"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linear25"
+            android:gravity="center"
+
+            >
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/num_telephone"
+                android:id="@+id/num_telephonetxt"
+                />
+            <EditText
+                android:layout_width="200dp"
+
+                android:layout_height="wrap_content"
+                android:id="@+id/num_telephone"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linear26"
+            android:gravity="center"
+
+            >
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/mail"
+                android:id="@+id/mailtxt"
+                />
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/mail"
+                />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/interet"
+            android:id="@+id/interets"
+            android:textSize="24sp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linear27"
+            android:gravity="center"
+            >
+            <CheckBox
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/sport"
+                android:id="@+id/sport"
+                />
+
+            <CheckBox
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/musique"
+                android:id="@+id/musique"
+                />
+            <CheckBox
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cinema"
+                android:id="@+id/cinema"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/soumettre"
+        android:id="@+id/submit"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/linear2"
+        />
+</RelativeLayout>
