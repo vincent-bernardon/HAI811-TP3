@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TP3</string>
+    <string name="exercice_1">Exercice 1</string>
+    <string name="exercice_7">Exercice 7</string>
+    <string name="exercice_6">Exercice 6</string>
+    <string name="exercice_5">Exercice 5</string>
+    <string name="exercice_4">Exercice 4</string>
+    <string name="exercice_3">Exercice 3</string>
+    <string name="exercice_2">Exercice 2</string>
+    <string name="exercice_8">Exercice 8</string>
+    <string name="exercice_9">Exercice 9</string>
+</resources>
