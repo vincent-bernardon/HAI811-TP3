@@ -39,7 +39,10 @@ public class FragmentFormulaire extends Fragment {
             bundle.putString("interets", (sport.isChecked() ? "Sport " : "") +
                     (musique.isChecked() ? "Musique " : "") +
                     (cinema.isChecked() ? "Cinéma" : ""));
+            //enregistre les données dans la base de données
+            ((Ex1) getActivity()).enregistrerUtilisateur(bundle);
 
+            //envoi les donenr au fragment affichage
             ((Ex1) getActivity()).envoyerDonnees(bundle);
         });
 
