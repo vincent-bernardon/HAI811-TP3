@@ -23,8 +23,12 @@ public class FragmentMenu extends Fragment {
 
         //si on appuis sur nouvelle inscripoitn, alros on affiche le formulaire d'inscription dans le fragemnt
         view.findViewById(R.id.nouvelle_inscription).setOnClickListener(v -> {
+            FragmentFormulaire fragmentFormulaire = new FragmentFormulaire();
+            Bundle bundle = new Bundle();
+            bundle.putInt("id", 2);
+            fragmentFormulaire.setArguments(bundle);
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, new FragmentFormulaire());
+            transaction.replace(R.id.fragment_container, fragmentFormulaire);
             transaction.addToBackStack(null);
             transaction.commit();
         });

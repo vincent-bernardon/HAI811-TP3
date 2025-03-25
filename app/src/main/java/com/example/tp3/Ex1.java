@@ -3,6 +3,7 @@ package com.example.tp3;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.room.Room;
 
 public class Ex1 extends AppCompatActivity {
@@ -13,6 +14,15 @@ public class Ex1 extends AppCompatActivity {
         setContentView(R.layout.activity_ex1);
 
         bd = BDutils.getBDInstance(getApplicationContext());
+
+        FragmentFormulaire fragmentFormulaire = new FragmentFormulaire();
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", 1);
+        fragmentFormulaire.setArguments(bundle);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentformulaire, fragmentFormulaire);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void envoyerDonnees(Bundle bundle) {
@@ -22,21 +32,4 @@ public class Ex1 extends AppCompatActivity {
         }
     }
 
-    public void enregistrerUtilisateur(Bundle bundle) {
-        String login = bundle.getString("login");
-        String pswd = bundle.getString("pswd");
-        String nom = bundle.getString("nom");
-        String dateNaissance = bundle.getString("date_naissance");
-        String numTelephone = bundle.getString("num_telephone");
-        String mail = bundle.getString("mail");
-        String interets = bundle.getString("interets");
-
-        // Créer un objet Utilisateur
-        Utilisateur utilisateur = new Utilisateur(login, pswd, nom, dateNaissance, numTelephone, mail, interets);
-
-        // Insérer dans la base de données
-        new Thread(() -> {
-            bd.utilisateurDAO().insert(utilisateur);
-        }).start();
-    }
 }

@@ -19,10 +19,20 @@ public class FragmentFormulaire extends Fragment {
     private UtilisateurDAO utilisateurDAO;
     private BD bd;
 
+    private int exo;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_fragment_formulaire, container, false);
+
+        if(getArguments() == null){
+            exo = 0;
+        }else{
+            exo = getArguments().getInt("id");
+        }
+
+        System.out.println("EXO : " + exo);
 
         bd = BDutils.getBDInstance(getActivity().getApplicationContext());
         utilisateurDAO = bd.utilisateurDAO();
@@ -82,13 +92,18 @@ public class FragmentFormulaire extends Fragment {
                         new Thread(()->enregistrerUtilisateur(bundle)).start();// ici on utilise un thread car enregistrerUtilisateur est une requete de la base de données
 
                         //envoi des données à l'activité pour l'affichage pour EX1 et donc détecter si on vien de EX1 ou EX2 pour faire des chose différente
-//                        ((Ex1) getActivity()).envoyerDonnees(bundle);
+                        if(exo == 1){
+                            ((Ex1) getActivity()).envoyerDonnees(bundle);
 
-                        //EX2 allez vers la page de connexion
-                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragment_container, new FragmentConnexion());
-                        transaction.addToBackStack(null);
-                        transaction.commit();
+                        }else{
+                            //EX2 allez vers la page de connexion
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_container, new FragmentConnexion());
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        }
+
+
                     }
                 });
             }).start();
