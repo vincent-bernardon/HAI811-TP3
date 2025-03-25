@@ -80,7 +80,6 @@ public class FragmentPlanning extends Fragment {
                 startActivity(intent);
             }).start();
 
-            Toast.makeText(getActivity(), "Planning enregistré avec succès", Toast.LENGTH_SHORT).show();
         });
 
 

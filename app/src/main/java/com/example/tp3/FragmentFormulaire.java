@@ -15,13 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
 public class FragmentFormulaire extends Fragment {
     private UtilisateurDAO utilisateurDAO;
     private BD bd;
-    private Executor executor = Executors.newSingleThreadExecutor();
 
     @Nullable
     @Override
@@ -62,7 +58,8 @@ public class FragmentFormulaire extends Fragment {
                 return;
             }
 
-            executor.execute(() -> {
+            // on dois utiliser des thread pour les requetes de la base de données sinon l'application va crasher
+            new Thread(() -> { // ici on utilise un thread car isEmailInUsed et isLoginInUsed sont des requetes de la base de données
                 boolean emailInUse = isEmailInUsed(email);
                 boolean loginInUse = isLoginInUsed(loginText);
                 getActivity().runOnUiThread(() -> {
@@ -81,8 +78,8 @@ public class FragmentFormulaire extends Fragment {
                         bundle.putString("interets", (sport.isChecked() ? "Sport " : "") +
                                 (musique.isChecked() ? "Musique " : "") +
                                 (cinema.isChecked() ? "Cinéma" : ""));
-                        // Save the user data in the database
-                        executor.execute(() -> enregistrerUtilisateur(bundle));
+
+                        new Thread(()->enregistrerUtilisateur(bundle)).start();// ici on utilise un thread car enregistrerUtilisateur est une requete de la base de données
 
                         //envoi des données à l'activité pour l'affichage pour EX1 et donc détecter si on vien de EX1 ou EX2 pour faire des chose différente
 //                        ((Ex1) getActivity()).envoyerDonnees(bundle);
@@ -94,7 +91,7 @@ public class FragmentFormulaire extends Fragment {
                         transaction.commit();
                     }
                 });
-            });
+            }).start();
         });
 
         return view;
