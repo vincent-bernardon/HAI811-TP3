@@ -20,4 +20,6 @@
     <string name="musique">Musique</string>
     <string name="cinema">Cinéma</string>
     <string name="soumettre">Soumettre</string>
+    <string name="nouvelle_inscription">Nouvelle Inscription</string>
+    <string name="connexion">Connexion</string>
 </resources>

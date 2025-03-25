@@ -12,8 +12,7 @@ public class Ex1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ex1);
 
-        bd = Room.databaseBuilder(getApplicationContext(),
-                BD.class, "bd").build();
+        bd = BDutils.getBDInstance(getApplicationContext());
     }
 
     public void envoyerDonnees(Bundle bundle) {

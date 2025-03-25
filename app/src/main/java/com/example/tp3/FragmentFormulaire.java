@@ -1,3 +1,4 @@
+// FragmentFormulaire.java
 package com.example.tp3;
 
 import android.os.Bundle;
@@ -7,15 +8,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class FragmentFormulaire extends Fragment {
+    private UtilisateurDAO utilisateurDAO;
+    private BD bd;
+    private Executor executor = Executors.newSingleThreadExecutor();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_fragment_formulaire, container, false);
+
+        bd = BDutils.getBDInstance(getActivity().getApplicationContext());
+        utilisateurDAO = bd.utilisateurDAO();
 
         EditText login = view.findViewById(R.id.login);
         EditText pswd = view.findViewById(R.id.pswd);
@@ -29,23 +42,71 @@ public class FragmentFormulaire extends Fragment {
         Button submit = view.findViewById(R.id.submit);
 
         submit.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("login", login.getText().toString());
-            bundle.putString("pswd", pswd.getText().toString());
-            bundle.putString("nom", nom.getText().toString());
-            bundle.putString("date_naissance", dateNaissance.getText().toString());
-            bundle.putString("num_telephone", numTelephone.getText().toString());
-            bundle.putString("mail", mail.getText().toString());
-            bundle.putString("interets", (sport.isChecked() ? "Sport " : "") +
-                    (musique.isChecked() ? "Musique " : "") +
-                    (cinema.isChecked() ? "Cinéma" : ""));
-            //enregistre les données dans la base de données
-            ((Ex1) getActivity()).enregistrerUtilisateur(bundle);
+            String email = mail.getText().toString();
+            String password = pswd.getText().toString();
+            String loginText = login.getText().toString();
 
-            //envoi les donenr au fragment affichage
-            ((Ex1) getActivity()).envoyerDonnees(bundle);
+            if (!email.contains("@")) {
+                Toast.makeText(getActivity(), "Email invalide", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if (password.length() <= 6) {
+                Toast.makeText(getActivity(), "Le mot de passe doit contenir plus de 6 caractères", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if (!Character.isLetter(loginText.charAt(0)) || loginText.length() > 10) {
+                Toast.makeText(getActivity(), "Le login doit commencer par une lettre et ne pas dépasser 10 caractères", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            executor.execute(() -> {
+                boolean emailInUse = isEmailInUsed(email);
+                getActivity().runOnUiThread(() -> {
+                    if (emailInUse) {
+                        Toast.makeText(getActivity(), "Email déjà utilisé", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("login", login.getText().toString());
+                        bundle.putString("pswd", pswd.getText().toString());
+                        bundle.putString("nom", nom.getText().toString());
+                        bundle.putString("date_naissance", dateNaissance.getText().toString());
+                        bundle.putString("num_telephone", numTelephone.getText().toString());
+                        bundle.putString("mail", email);
+                        bundle.putString("interets", (sport.isChecked() ? "Sport " : "") +
+                                (musique.isChecked() ? "Musique " : "") +
+                                (cinema.isChecked() ? "Cinéma" : ""));
+                        // Save the user data in the database
+                        executor.execute(() -> enregistrerUtilisateur(bundle));
+
+                        //envoi des données à l'activité pour l'affichage pour EX1
+//                        ((Ex1) getActivity()).envoyerDonnees(bundle);
+                    }
+                });
+            });
         });
 
         return view;
+    }
+
+    private boolean isEmailInUsed(String email) {
+        return utilisateurDAO.isEmailInUsed(email) > 0;
+    }
+
+    public void enregistrerUtilisateur(Bundle bundle) {
+        String login = bundle.getString("login");
+        String pswd = bundle.getString("pswd");
+        String nom = bundle.getString("nom");
+        String dateNaissance = bundle.getString("date_naissance");
+        String numTelephone = bundle.getString("num_telephone");
+        String mail = bundle.getString("mail");
+        String interets = bundle.getString("interets");
+
+        // Créer un objet Utilisateur
+        Utilisateur utilisateur = new Utilisateur(login, pswd, nom, dateNaissance, numTelephone, mail, interets);
+
+        // Insérer dans la base de données
+        bd.utilisateurDAO().insert(utilisateur);
     }
 }
