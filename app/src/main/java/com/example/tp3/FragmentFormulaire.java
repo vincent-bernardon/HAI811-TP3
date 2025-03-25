@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -63,8 +64,11 @@ public class FragmentFormulaire extends Fragment {
 
             executor.execute(() -> {
                 boolean emailInUse = isEmailInUsed(email);
+                boolean loginInUse = isLoginInUsed(loginText);
                 getActivity().runOnUiThread(() -> {
-                    if (emailInUse) {
+                    if(loginInUse) {
+                        Toast.makeText(getActivity(), "Login déjà utilisé", Toast.LENGTH_SHORT).show();
+                    } else if (emailInUse) {
                         Toast.makeText(getActivity(), "Email déjà utilisé", Toast.LENGTH_SHORT).show();
                     } else {
                         Bundle bundle = new Bundle();
@@ -80,8 +84,14 @@ public class FragmentFormulaire extends Fragment {
                         // Save the user data in the database
                         executor.execute(() -> enregistrerUtilisateur(bundle));
 
-                        //envoi des données à l'activité pour l'affichage pour EX1
+                        //envoi des données à l'activité pour l'affichage pour EX1 et donc détecter si on vien de EX1 ou EX2 pour faire des chose différente
 //                        ((Ex1) getActivity()).envoyerDonnees(bundle);
+
+                        //EX2 allez vers la page de connexion
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container, new FragmentConnexion());
+                        transaction.addToBackStack(null);
+                        transaction.commit();
                     }
                 });
             });
@@ -92,6 +102,9 @@ public class FragmentFormulaire extends Fragment {
 
     private boolean isEmailInUsed(String email) {
         return utilisateurDAO.isEmailInUsed(email) > 0;
+    }
+    private boolean isLoginInUsed(String login) {
+        return utilisateurDAO.isLoginInUsed(login) > 0;
     }
 
     public void enregistrerUtilisateur(Bundle bundle) {

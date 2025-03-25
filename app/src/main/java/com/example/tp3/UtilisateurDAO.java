@@ -13,4 +13,10 @@ public interface UtilisateurDAO {
 
     @Query("SELECT * FROM utilisateur WHERE mail = :email")
     Utilisateur getUtilisateurByEmail(String email);
+
+    @Query("SELECT COUNT(*) FROM utilisateur WHERE login = :login")
+    int isLoginInUsed(String login);
+
+    @Query("SELECT * FROM utilisateur WHERE login = :login AND pswd = :password")
+    Utilisateur getUtilisateur(String login, String password);
 }

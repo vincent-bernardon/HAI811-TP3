@@ -29,6 +29,13 @@ public class FragmentMenu extends Fragment {
             transaction.commit();
         });
 
+        view.findViewById(R.id.connexion).setOnClickListener(v->{
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, new FragmentConnexion());
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+
         return view;
     }
 }

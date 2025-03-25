@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentConnexion">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear1"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/login"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/entrez_votre_login"
+            android:textSize="18sp"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/mdp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/entrez_votre_mot_de_passe"
+            android:textSize="18sp"
+            android:inputType="textPassword"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/buttonConnexion"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/connexion"
+            android:textSize="24sp"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+
+</RelativeLayout >

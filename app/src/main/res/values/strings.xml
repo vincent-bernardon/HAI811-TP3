@@ -22,4 +22,15 @@
     <string name="soumettre">Soumettre</string>
     <string name="nouvelle_inscription">Nouvelle Inscription</string>
     <string name="connexion">Connexion</string>
+    <string name="entrez_votre_login">Entrez votre login</string>
+    <string name="entrez_votre_mot_de_passe">Entrez votre mot de passe</string>
+    <string name="saisissez_votre_planning_journalier">Saisissez votre planning journalier</string>
+    <string name="_08h_10h">08h-10h</string>
+    <string name="_10h_12h">10h-12h</string>
+    <string name="_14h_16h">14h-16h</string>
+    <string name="_16h_18h">16h-18h</string>
+    <string name="enregistrer">Enregistrer</string>
+    <string name="s_lectionnez_une_date_yyyy_mm_dd">Sélectionnez une date yyyy-MM-dd</string>
+    <string name="choisir_une_date">Choisir une date</string>
+    <string name="synth_se_du_planning">Synthèse du Planning</string>
 </resources>
