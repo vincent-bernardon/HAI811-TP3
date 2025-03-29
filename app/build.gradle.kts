@@ -43,7 +43,7 @@ dependencies {
     // Dépendance pour Room
     implementation("androidx.room:room-runtime:2.5.0")
 
-    // Pour la compilation des annotations Room (remplace KAPT par annotationProcessor)
+    // Pour la compilation des annotations Room
     annotationProcessor("androidx.room:room-compiler:2.5.0")
 
 }
