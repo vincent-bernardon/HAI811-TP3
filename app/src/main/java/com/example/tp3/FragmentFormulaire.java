@@ -1,4 +1,3 @@
-// FragmentFormulaire.java
 package com.example.tp3;
 
 import android.os.Bundle;
