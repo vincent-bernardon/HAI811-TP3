@@ -46,6 +46,8 @@ public class FragmentConnexion extends Fragment {
                 //vérification dans la BD
                 Utilisateur utilisateur = bd.utilisateurDAO().getUtilisateur(login, password);
                 if (utilisateur != null) {
+                    System.out.println(utilisateur.toString());
+
                     Bundle args = new Bundle();
                     args.putString("mail", utilisateur.getMail());
                     FragmentPlanning fragmentPlanning = new FragmentPlanning();
@@ -57,7 +59,9 @@ public class FragmentConnexion extends Fragment {
                     transaction.commit();
 
                 } else {
-                    Toast.makeText(getActivity(), "Identifiants incorrects", Toast.LENGTH_SHORT).show();
+                    getActivity().runOnUiThread(() ->
+                            Toast.makeText(getActivity(), "Identifiants incorrects", Toast.LENGTH_SHORT).show()
+                    );
                 }
             }).start();
         });

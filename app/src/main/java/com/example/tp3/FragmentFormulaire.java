@@ -128,10 +128,10 @@ public class FragmentFormulaire extends Fragment {
         String mail = bundle.getString("mail");
         String interets = bundle.getString("interets");
 
-        // Créer un objet Utilisateur
+        //creer un objet Utilisateur
         Utilisateur utilisateur = new Utilisateur(login, pswd, nom, dateNaissance, numTelephone, mail, interets);
 
-        // Insérer dans la base de données
+        //inserer dans la base de données
         bd.utilisateurDAO().insert(utilisateur);
     }
 }
