@@ -45,6 +45,7 @@ public class FragmentPlanning extends Fragment {
         EditText et_14_16 = view.findViewById(R.id.et_14_16);
         EditText et_16_18 = view.findViewById(R.id.et_16_18);
         Button buttonSave = view.findViewById(R.id.save);
+        Button buttonAfficher = view.findViewById(R.id.afficher_planning);
 
         buttonDate.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
@@ -75,12 +76,17 @@ public class FragmentPlanning extends Fragment {
             Planning planning = new Planning(selectDate,planning08_10, planning10_12, planning14_16, planning16_18,mail);
             new Thread(() -> {
                 bd.planingDAO().insert(planning);
-                Intent intent = new Intent(getActivity(), SynthesePlanningActivity.class);
-                intent.putExtra("mail", mail); // Passer l'email de l'utilisateur à l'activité de synthèse
-                startActivity(intent);
+
             }).start();
 
         });
+
+        buttonAfficher.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SynthesePlanningActivity.class);
+            intent.putExtra("mail", mail); // Passer l'email de l'utilisateur à l'activité de synthèse
+            startActivity(intent);
+        });
+
 
 
 

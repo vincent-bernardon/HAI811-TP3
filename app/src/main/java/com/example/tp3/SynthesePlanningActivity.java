@@ -62,6 +62,11 @@ public class SynthesePlanningActivity extends AppCompatActivity {
             }
         }).start();
 
+        //si on appuis sur go back
+        findViewById(R.id.go_back).setOnClickListener(v -> {
+            finish();
+        });
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

@@ -78,7 +78,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/enregistrer"
                 android:layout_marginTop="16dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/afficher_planning"
+                android:layout_marginTop="16dp"
+                android:id="@+id/afficher_planning"/>
         </LinearLayout>
+
+
     </ScrollView>
 
 </RelativeLayout>

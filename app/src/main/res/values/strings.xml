@@ -33,4 +33,6 @@
     <string name="s_lectionnez_une_date_yyyy_mm_dd">Sélectionnez une date yyyy-MM-dd</string>
     <string name="choisir_une_date">Choisir une date</string>
     <string name="synth_se_du_planning">Synthèse du Planning</string>
+    <string name="go_back">Go Back</string>
+    <string name="afficher_planning">Afficher Planning</string>
 </resources>
